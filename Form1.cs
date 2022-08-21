@@ -63,6 +63,8 @@ namespace Semana_4
             AssignIconsToSquares();
         }
 
+
+
         private void label1_Click(object sender, EventArgs e)
         {
             // The timer is only on after two non-matching 
@@ -70,6 +72,8 @@ namespace Semana_4
             // so ignore any clicks if the timer is running
             if (timer1.Enabled == true)
                 return;
+
+
 
             Label clickedLabel = sender as Label;
 
@@ -129,5 +133,33 @@ namespace Semana_4
                 secondClicked = null;
             
         }
+
+        private void CheckForWinner()
+        {
+            // Go through all of the labels in the TableLayoutPanel, 
+            // checking each one to see if its icon is matched
+            foreach (Control control in tableLayoutPanel1.Controls)
+            {
+                Label iconLabel = control as Label;
+
+                if (iconLabel != null)
+                {
+                    if (iconLabel.ForeColor == iconLabel.BackColor)
+                        return;
+                }
+            }
+
+            // If the loop didn’t return, it didn't find
+            // any unmatched icons
+            // That means the user won. Show a message and close the form
+            MessageBox.Show("You matched all the icons!", "Congratulations");
+            Close();
+
+           
+            
+
+        }
+
+
     }
 }
